@@ -275,6 +275,7 @@ class badge {
         $fordb->usermodified = $USER->id;
         $fordb->timecreated = time();
         $fordb->timemodified = time();
+        $tags = \core_tag_tag::get_item_tags_array('core', 'badges', $fordb->id);
         unset($fordb->id);
 
         if ($fordb->notification > 1) {
@@ -286,6 +287,8 @@ class badge {
 
         if ($new = $DB->insert_record('badge', $fordb, true)) {
             $newbadge = new badge($new);
+            // Copy badge tags.
+            \core_tag_tag::set_item_tags('core', 'badges', $newbadge->id, context_system::instance(), $tags);
 
             // Copy badge image.
             $fs = get_file_storage();
