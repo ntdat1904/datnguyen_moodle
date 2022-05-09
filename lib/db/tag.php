@@ -88,7 +88,9 @@ $tagareas = array(
         'callbackfile' => '/course/lib.php',
     ),
     array(
-        'itemtype' => 'badges', // Badges.
+        'itemtype' => 'badge', // Badges.
         'component' => 'core',
+        'callback' => 'badge_get_tagged_badges',
+        'callbackfile' => '/badges/lib.php',
     ),
 );

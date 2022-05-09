@@ -73,3 +73,43 @@ function core_badges_myprofile_navigation(\core_user\output\myprofile\tree $tree
         }
     }
 }
+
+/**
+ * Returns badges tagged with a specified tag.
+ *
+ * @param core_tag_tag $tag
+ * @param bool $exclusivemode if set to true it means that no other entities tagged with this tag
+ *             are displayed on the page and the per-page limit may be bigger
+ * @param int $fromctx context id where the link was displayed, may be used by callbacks
+ *            to display items in the same context first
+ * @param int $ctx context id where to search for records
+ * @param bool $rec search in subcontexts as well
+ * @param int $page 0-based number of page being displayed
+ * @return \core_tag\output\tagindex
+ */
+function badge_get_tagged_badges($tag, $exclusivemode = false, $fromctx = 0, $ctx = 0, $rec = true, $page = 0) {
+    global $OUTPUT;
+
+    $badgecount = $tag->count_tagged_items('core', 'badge');
+    $perpage = $exclusivemode ? 20 : 5;
+    $content = '';
+    $totalpages = ceil($badgecount / $perpage);
+
+    if ($badgecount) {
+        $badges = $tag->get_tagged_items('core', 'badge', $page * $perpage, $perpage);
+        $tagfeed = new core_tag\output\tagfeed();
+        foreach ($badges as $badge) {
+            $badgelink = new moodle_url('/badges/overview.php', array('id' => $badge->id));
+            $fullname = html_writer::link($badgelink, $badge->name);
+            $icon = html_writer::link($badgelink, html_writer::empty_tag('img',
+                array('src' => $OUTPUT->image_url('i/badge'))));
+            $tagfeed->add($icon, $fullname, '<br>');
+        }
+
+        $items = $tagfeed->export_for_template($OUTPUT);
+
+        $content .= $OUTPUT->render_from_template('core_tag/tagfeed', $items);
+    }
+    return new core_tag\output\tagindex($tag, 'core', 'badge', $content,
+        $exclusivemode, $fromctx, $ctx, $rec, $page, $totalpages);
+}
