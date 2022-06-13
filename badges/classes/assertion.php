@@ -161,6 +161,10 @@ class core_badges_assertion {
             if (!empty($this->_data->dateexpire)) {
                 $assertion['expires'] = $this->_data->dateexpire;
             }
+            $tags = $this->get_tags();
+            if (!empty($tags)) {
+                $assertion['tags'] = $tags;
+            }
             $this->embed_data_badge_version2($assertion, OPEN_BADGES_V2_TYPE_ASSERTION);
         }
         return $assertion;
@@ -204,6 +208,10 @@ class core_badges_assertion {
                 $params = ['id' => $this->get_badge_id(), 'obversion' => $this->_obversion];
                 $issuerurl = new moodle_url('/badges/issuer_json.php', $params);
                 $class['issuer'] = $issuerurl->out(false);
+            }
+            $tags = $this->get_tags();
+            if (!empty($tags)) {
+                $class['tags'] = $tags;
             }
             $this->embed_data_badge_version2($class, OPEN_BADGES_V2_TYPE_BADGE);
             if (!$issued) {
@@ -403,5 +411,15 @@ class core_badges_assertion {
                 $json['type'] = OPEN_BADGES_V2_TYPE_ISSUER;
             }
         }
+    }
+
+    /**
+     * Get tags of the badge.
+     *
+     * @return string tags.
+     */
+    public function get_tags() {
+        $badge = new badge($this->get_badge_id());
+        return $badge->get_badge_tags();
     }
 }

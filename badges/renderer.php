@@ -178,6 +178,7 @@ class core_badges_renderer extends plugin_renderer_base {
         $languages = get_string_manager()->get_list_of_languages();
 
         // Badge details.
+        $badge = new badge($badge->id);
         $display .= $this->heading(get_string('badgedetails', 'badges'), 3);
         $dl = array();
         $dl[get_string('name')] = $badge->name;
@@ -192,6 +193,7 @@ class core_badges_renderer extends plugin_renderer_base {
         $dl[get_string('imageauthorurl', 'badges')] =
             html_writer::link($badge->imageauthorurl, $badge->imageauthorurl, array('target' => '_blank'));
         $dl[get_string('imagecaption', 'badges')] = $badge->imagecaption;
+        $dl[get_string('tags', 'badges')] = $badge->get_badge_tags();
         $display .= $this->definition_list($dl);
 
         // Issuer details.

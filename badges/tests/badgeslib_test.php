@@ -135,9 +135,13 @@ class badgeslib_test extends advanced_testcase {
         $alignment->targetcode = 'CCSS.RST.11-12.3';
         $DB->insert_record('badge_alignment', $alignment, true);
 
+        // Insert tags.
+        core_tag_tag::set_item_tags('core_badges', 'badge', $badge->id, $badge->get_context(), ['tag1, tag2']);
+
         $this->assertion = new stdClass();
-        $this->assertion->badge = '{"uid":"%s","recipient":{"identity":"%s","type":"email","hashed":true,"salt":"%s"},"badge":"%s","verify":{"type":"hosted","url":"%s"},"issuedOn":"%d","evidence":"%s"}';
-        $this->assertion->class = '{"name":"%s","description":"%s","image":"%s","criteria":"%s","issuer":"%s"}';
+        $this->assertion->badge = '{"uid":"%s","recipient":{"identity":"%s","type":"email","hashed":true,"salt":"%s"},' .
+            '"badge":"%s","verify":{"type":"hosted","url":"%s"},"issuedOn":"%d","evidence":"%s","tags":"%s"}';
+        $this->assertion->class = '{"name":"%s","description":"%s","image":"%s","criteria":"%s","issuer":"%s","tags":"%s"}';
         $this->assertion->issuer = '{"name":"%s","url":"%s","email":"%s"}';
         // Format JSON-LD for Openbadge specification version 2.0.
         $this->assertion2 = new stdClass();
@@ -145,16 +149,16 @@ class badgeslib_test extends advanced_testcase {
             '"badge":{"name":"%s","description":"%s","image":"%s",' .
             '"criteria":{"id":"%s","narrative":"%s"},"issuer":{"name":"%s","url":"%s","email":"%s",' .
             '"@context":"https:\/\/w3id.org\/openbadges\/v2","id":"%s","type":"Issuer"},' .
-            '"@context":"https:\/\/w3id.org\/openbadges\/v2","id":"%s","type":"BadgeClass","version":"%s",' .
+            '"tags":"%s","@context":"https:\/\/w3id.org\/openbadges\/v2","id":"%s","type":"BadgeClass","version":"%s",' .
             '"@language":"en","related":[{"id":"%s","version":"%s","@language":"%s"}],"endorsement":"%s",' .
             '"alignments":[{"targetName":"%s","targetUrl":"%s","targetDescription":"%s","targetFramework":"%s",' .
-            '"targetCode":"%s"}]},"verify":{"type":"hosted","url":"%s"},"issuedOn":"%s","evidence":"%s",' .
+            '"targetCode":"%s"}]},"verify":{"type":"hosted","url":"%s"},"issuedOn":"%s","evidence":"%s","tags":"%s",' .
             '"@context":"https:\/\/w3id.org\/openbadges\/v2","type":"Assertion","id":"%s"}';
 
         $this->assertion2->class = '{"name":"%s","description":"%s","image":"%s",' .
             '"criteria":{"id":"%s","narrative":"%s"},"issuer":{"name":"%s","url":"%s","email":"%s",' .
             '"@context":"https:\/\/w3id.org\/openbadges\/v2","id":"%s","type":"Issuer"},' .
-            '"@context":"https:\/\/w3id.org\/openbadges\/v2","id":"%s","type":"BadgeClass","version":"%s",' .
+            '"tags":"%s","@context":"https:\/\/w3id.org\/openbadges\/v2","id":"%s","type":"BadgeClass","version":"%s",' .
             '"@language":"%s","related":[{"id":"%s","version":"%s","@language":"%s"}],"endorsement":"%s",' .
             '"alignments":[{"targetName":"%s","targetUrl":"%s","targetDescription":"%s","targetFramework":"%s",' .
             '"targetCode":"%s"}]}';
@@ -1637,5 +1641,25 @@ class badgeslib_test extends advanced_testcase {
             badges_change_sortorder_backpacks($backpackid, BACKPACK_MOVE_UP);
             $backpack = badges_get_site_backpack($backpackid);
         }
+    }
+
+    /**
+     * Testing function test_badge_get_tagged_badges - search tagged badges
+     *
+     * @covers ::badge_get_tagged_badges
+     */
+    public function test_badge_get_tagged_badges() {
+        $this->resetAfterTest();
+        $this->setAdminUser();
+
+        // Setup test data.
+        $badge = new badge($this->coursebadge);
+        \core_tag_tag::set_item_tags('core_badges', 'badge', $this->badgeid, $badge->get_context(),
+            ['Cats', 'Dogs']);
+
+        $tag = \core_tag_tag::get_by_name(0, 'Cats');
+
+        $res = badge_get_tagged_badges($tag, false, 0, 0, 1, 0);
+        $this->assertStringContainsString("Test badge with 'apostrophe' and other friends (<>&@#)", $res->content);
     }
 }
