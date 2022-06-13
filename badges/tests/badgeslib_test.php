@@ -1638,4 +1638,23 @@ class badgeslib_test extends advanced_testcase {
             $backpack = badges_get_site_backpack($backpackid);
         }
     }
+
+    /**
+     * Testing function test_badge_get_tagged_badges - search tagged badges
+     *
+     * @covers ::badge_get_tagged_badges
+     */
+    public function test_badge_get_tagged_badges() {
+        $this->resetAfterTest();
+        $this->setAdminUser();
+
+        // Setup test data.
+        \core_tag_tag::set_item_tags('core', 'badge', $this->badgeid, context_system::instance(),
+            ['Cats', 'Dogs']);
+
+        $tag = \core_tag_tag::get_by_name(0, 'Cats');
+
+        $res = badge_get_tagged_badges($tag, false, 0, 0, 1, 0);
+        $this->assertStringContainsString("Test badge with 'apostrophe' and other friends (<>&@#)", $res->content);
+    }
 }
