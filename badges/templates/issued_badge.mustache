@@ -211,6 +211,14 @@
             </div>
             {{/coursefullname}}
         </div>
+        {{#badgetag}}
+            <p class="pb-2">
+                {{#str}}
+                    tagsdetail,
+                    core_badges,
+                    {{badgetag}}
+                {{/str}}</p>
+        {{/badgetag}}
 
         <p class="pb-4">{{{badgedescription}}}</p>
 

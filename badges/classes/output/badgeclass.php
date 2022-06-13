@@ -170,6 +170,10 @@ class badgeclass implements renderable {
             }
         }
 
+        // Field: Tags.
+        $badge = new badge($this->badgeid);
+        $data->badgetag = $badge->get_badge_tags();
+
         return $data;
     }
 }
