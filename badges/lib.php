@@ -90,16 +90,16 @@ function core_badges_myprofile_navigation(\core_user\output\myprofile\tree $tree
 function badge_get_tagged_badges($tag, $exclusivemode = false, $fromctx = 0, $ctx = 0, $rec = true, $page = 0) {
     global $OUTPUT;
 
-    $badgecount = $tag->count_tagged_items('core', 'badge');
+    $badgecount = $tag->count_tagged_items('core_badges', 'badge');
     $perpage = $exclusivemode ? 20 : 5;
     $content = '';
     $totalpages = ceil($badgecount / $perpage);
 
     if ($badgecount) {
-        $badges = $tag->get_tagged_items('core', 'badge', $page * $perpage, $perpage);
+        $badges = $tag->get_tagged_items('core_badges', 'badge', $page * $perpage, $perpage);
         $tagfeed = new core_tag\output\tagfeed();
         foreach ($badges as $badge) {
-            $badgelink = new moodle_url('/badges/overview.php', ['id' => $badge->id]);
+            $badgelink = new moodle_url('/badges/badgeclass.php', ['id' => $badge->id]);
             $fullname = html_writer::link($badgelink, $badge->name);
             $icon = html_writer::link($badgelink, html_writer::empty_tag('img',
                 ['src' => $OUTPUT->image_url('i/badge')]));
@@ -110,6 +110,6 @@ function badge_get_tagged_badges($tag, $exclusivemode = false, $fromctx = 0, $ct
 
         $content .= $OUTPUT->render_from_template('core_tag/tagfeed', $items);
     }
-    return new core_tag\output\tagindex($tag, 'core', 'badge', $content,
+    return new core_tag\output\tagindex($tag, 'core_badges', 'badge', $content,
         $exclusivemode, $fromctx, $ctx, $rec, $page, $totalpages);
 }

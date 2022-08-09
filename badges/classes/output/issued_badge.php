@@ -139,11 +139,10 @@ class issued_badge implements renderable {
             }
         }
 
-        // Fields: Name, description, issuedOn.
+        // Fields: Name, description, tags, issuedOn.
         $data->badgename = $badge->name;
         $data->badgedescription = $badge->description;
-        $data->badgetag = implode(', ',
-            \core_tag_tag::get_item_tags_array('core', 'badge', $badge->id));
+        $data->badgetag = $badge->get_badge_tags();
         $data->badgeissuedon = $this->issued['issuedOn'];
 
         // Field: Recipient (the badge was awarded to this person).

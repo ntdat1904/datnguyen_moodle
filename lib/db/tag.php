@@ -89,8 +89,8 @@ $tagareas = [
     ],
     [
         'itemtype' => 'badge', // Badges.
-        'component' => 'core',
+        'component' => 'core_badges',
         'callback' => 'badge_get_tagged_badges',
         'callbackfile' => '/badges/lib.php',
-    ]
+    ],
 ];

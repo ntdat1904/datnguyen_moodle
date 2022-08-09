@@ -92,7 +92,7 @@ class badge extends moodleform {
         $mform->addElement('text', 'imagecaption', get_string('imagecaption', 'badges'), array('size' => '70'));
         $mform->setType('imagecaption', PARAM_TEXT);
         $mform->addHelpButton('imagecaption', 'imagecaption', 'badges');
-        $mform->addElement('tags', 'tags', get_string('tags', 'badges'), ['itemtype' => 'badge', 'component' => 'core']);
+        $mform->addElement('tags', 'tags', get_string('tags', 'badges'), ['itemtype' => 'badge', 'component' => 'core_badges']);
 
         if (badges_open_badges_backpack_api() == OPEN_BADGES_V1) {
             $mform->addElement('header', 'issuerdetails', get_string('issuerdetails', 'badges'));
@@ -186,7 +186,7 @@ class badge extends moodleform {
             $defaultvalues['expiry'] = 2;
             $defaultvalues['expireperiod'] = $badge->expireperiod;
         }
-        $defaultvalues['tags'] = \core_tag_tag::get_item_tags_array('core', 'badge', $badge->id);
+        $defaultvalues['tags'] = \core_tag_tag::get_item_tags_array('core_badges', 'badge', $badge->id);
         $defaultvalues['currentimage'] = print_badge_image($badge, $badge->get_context(), 'large');
 
         parent::set_data($defaultvalues);
