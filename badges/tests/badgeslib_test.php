@@ -139,7 +139,8 @@ class badgeslib_test extends advanced_testcase {
         core_tag_tag::set_item_tags('core_badges', 'badge', $badge->id, $badge->get_context(), ['tag1, tag2']);
 
         $this->assertion = new stdClass();
-        $this->assertion->badge = '{"uid":"%s","recipient":{"identity":"%s","type":"email","hashed":true,"salt":"%s"},"badge":"%s","verify":{"type":"hosted","url":"%s"},"issuedOn":"%d","evidence":"%s","tags":"%s"}';
+        $this->assertion->badge = '{"uid":"%s","recipient":{"identity":"%s","type":"email","hashed":true,"salt":"%s"},' .
+            '"badge":"%s","verify":{"type":"hosted","url":"%s"},"issuedOn":"%d","evidence":"%s","tags":"%s"}';
         $this->assertion->class = '{"name":"%s","description":"%s","image":"%s","criteria":"%s","issuer":"%s","tags":"%s"}';
         $this->assertion->issuer = '{"name":"%s","url":"%s","email":"%s"}';
         // Format JSON-LD for Openbadge specification version 2.0.
