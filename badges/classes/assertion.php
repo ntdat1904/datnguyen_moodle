@@ -162,7 +162,7 @@ class core_badges_assertion {
                 $assertion['expires'] = $this->_data->dateexpire;
             }
             $tags = $this->get_tags();
-            if (!empty($tags)) {
+            if (is_array($tags) && count($tags) > 0) {
                 $assertion['tags'] = $tags;
             }
             $this->embed_data_badge_version2($assertion, OPEN_BADGES_V2_TYPE_ASSERTION);
@@ -210,7 +210,7 @@ class core_badges_assertion {
                 $class['issuer'] = $issuerurl->out(false);
             }
             $tags = $this->get_tags();
-            if (!empty($tags)) {
+            if (is_array($tags) && count($tags) > 0) {
                 $class['tags'] = $tags;
             }
             $this->embed_data_badge_version2($class, OPEN_BADGES_V2_TYPE_BADGE);
@@ -416,10 +416,9 @@ class core_badges_assertion {
     /**
      * Get tags of the badge.
      *
-     * @return string tags.
+     * @return array tags.
      */
-    public function get_tags() {
-        $badge = new badge($this->get_badge_id());
-        return $badge->get_badge_tags();
+    public function get_tags(): array {
+        return array_values(\core_tag_tag::get_item_tags_array('core_badges', 'badge', $this->get_badge_id()));
     }
 }

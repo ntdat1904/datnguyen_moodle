@@ -275,7 +275,7 @@ class badge {
         $fordb->usermodified = $USER->id;
         $fordb->timecreated = time();
         $fordb->timemodified = time();
-        $tags = \core_tag_tag::get_item_tags_array('core_badges', 'badge', $fordb->id);
+        $tags = $this->get_badge_tags();
         unset($fordb->id);
 
         if ($fordb->notification > 1) {
@@ -959,10 +959,9 @@ class badge {
     /**
      * Get tags of badge.
      *
-     * @return string Badge tags.
+     * @return array Badge tags.
      */
-    public function get_badge_tags() {
-        $listsep = get_string('listsep', 'langconfig');
-        return implode("$listsep ", \core_tag_tag::get_item_tags_array('core_badges', 'badge', $this->id));
+    public function get_badge_tags(): array {
+        return array_values(\core_tag_tag::get_item_tags_array('core_badges', 'badge', $this->id));
     }
 }

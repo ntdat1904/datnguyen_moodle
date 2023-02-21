@@ -48,7 +48,8 @@ Feature: Add badges to the system
     And I should see "Test Badge Site"
     And I should see "testuser@example.com"
     And I should see "Tags"
-    And I should see "Math, Physics"
+    And I should see "Math"
+    And I should see "Physics"
     And I navigate to "Badges > Manage badges" in site administration
     And I should not see "There are currently no badges available for users to earn."
 
@@ -203,4 +204,5 @@ Feature: Add badges to the system
     And I should not see "Math, Physics"
     And I should see "Test badge renamed"
     And I should see "secondversion"
-    And I should see "Math, History"
+    And I should see "Math"
+    And I should see "History"

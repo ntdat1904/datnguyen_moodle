@@ -80,8 +80,9 @@ if ($badge->status != BADGE_STATUS_INACTIVE) {
         if (!empty($badge->language)) {
             $json['@language'] = $badge->language;
         }
-        if (!empty($badge->get_badge_tags())) {
-            $json['tags'] = $badge->get_badge_tags();
+        $badgetags = $badge->get_badge_tags();
+        if ($badgetags) {
+            $json['tags'] = $badgetags;
         }
 
         $relatedbadges = $badge->get_related_badges(true);
