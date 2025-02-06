@@ -136,6 +136,7 @@ filterbyname,core_grades
 filterfirstactive,core_grades
 filterlastactive,core_grades
 privacy:metadata:preference:reportfilter,core_reportbuilder
+userpicture,core_reportbuilder
 noreplybouncemessage,core
 noreplybouncesubject,core
 configgeneralquestionbank,core_backup
@@ -148,3 +149,4 @@ advancedelement,core_form
 sitecommnews,core_hub
 sitecommnews_help,core_hub
 sitecommnewsyes,core_hub
+cc_import_req_php5,core_imscc

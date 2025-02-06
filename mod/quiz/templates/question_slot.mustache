@@ -54,17 +54,19 @@
     {{{questionnumber}}}
     <div class="mod-indent"></div>
     <div class="activityinstance">
-        {{{questionname}}}
+        <div>{{{questionname}}}</div>
         {{#issharedbank}}
-            <a href="{{bankurl}}">
-                <span class="badge bg-primary text-light ms-2 mt-1">{{bankname}}</span>
-            </a>
+            <div>
+                <a href="{{bankurl}}">
+                    <span class="badge bg-primary text-light ms-2 mt-1">{{bankname}}</span>
+                </a>
+            </div>
         {{/issharedbank}}
     </div>
-    <span class="actions">
+    <div class="actions">
         {{#versionselection}}
             <label for="version-{{slotid}}" class="visually-hidden">{{#str}}question_version, question{{/str}}</label>
-            <select id="version-{{slotid}}" name="version" class="form-control me-2 h-auto version-selection"
+            <select id="version-{{slotid}}" name="version" class="form-control me-2 version-selection"
             data-action="mod_quiz-select_slot" data-slot-id="{{slotid}}">
                 {{#versionoption}}
                     <option value="{{version}}" {{#selected}}selected="selected"{{/selected}}>{{versionvalue}}</option>
@@ -72,7 +74,7 @@
             </select>
         {{/versionselection}}
         {{{questionicons}}}
-    </span>
+    </div>
     {{#canbeedited}}
         {{{questiondependencyicon}}}
     {{/canbeedited}}

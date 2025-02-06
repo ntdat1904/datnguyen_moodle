@@ -1835,7 +1835,7 @@ function glossary_print_approval_menu($cm, $glossary,$mode, $hook, $sortkey = ''
 
     glossary_print_all_links($cm, $glossary, $mode, $hook);
 
-    glossary_print_sorting_links($cm, $mode, 'CREATION', 'asc');
+    glossary_print_sorting_links($cm, $mode, $sortkey, $sortorder);
 }
 /**
  * @param object $cm
@@ -2057,9 +2057,14 @@ function glossary_print_sorting_links($cm, $mode, $sortkey = '',$sortorder = '')
     $bopen  = '<b>';
     $bclose = '</b>';
 
-     $neworder = '';
-     $currentorder = '';
-     $currentsort = '';
+    $neworder = '';
+    $currentorder = '';
+    $currentsort = '';
+
+    if ($sortkey === '') {
+        $sortkey = 'CREATION';
+    }
+
      if ( $sortorder ) {
          if ( $sortorder == 'asc' ) {
              $currentorder = $asc;
@@ -2082,20 +2087,18 @@ function glossary_print_sorting_links($cm, $mode, $sortkey = '',$sortorder = '')
              $icon = " " . $OUTPUT->pix_icon('asc', $newordertitle, 'glossary');
          }
      }
-     $ficon     = '';
-     $fneworder = '';
-     $fbtag     = '';
-     $fendbtag  = '';
 
-     $sicon     = '';
-     $sneworder = '';
+    $ficon     = '';
+    $fneworder = '';
 
-     $sbtag      = '';
-     $fbtag      = '';
-     $fendbtag      = '';
-     $sendbtag      = '';
+    $sicon     = '';
+    $sneworder = '';
 
-     $sendbtag  = '';
+    $sbtag      = '';
+    $fbtag      = '';
+    $fendbtag      = '';
+
+    $sendbtag  = '';
 
      if ( $sortkey == 'CREATION' or $sortkey == 'FIRSTNAME' ) {
          $ficon       = $icon;
@@ -4071,7 +4074,7 @@ function glossary_get_entries_to_approve($glossary, $context, $letter, $order, $
 
     // Now sort the array in regard to the current language.
     if ($order == 'CREATION') {
-        if ($sort == "DESC") {
+        if (strcasecmp($sort, 'DESC') === 0) {
             usort($filteredentries, function($a, $b) {
                 return $b->timecreated <=> $a->timecreated;
             });
@@ -4081,7 +4084,7 @@ function glossary_get_entries_to_approve($glossary, $context, $letter, $order, $
             });
         }
     } else if ($order == 'UPDATE') {
-        if ($sort == "DESC") {
+        if (strcasecmp($sort, 'DESC') === 0) {
             usort($filteredentries, function($a, $b) {
                 return $b->timemodified <=> $a->timemodified;
             });
@@ -4092,7 +4095,7 @@ function glossary_get_entries_to_approve($glossary, $context, $letter, $order, $
         }
     } else {
         // This means CONCEPT.
-        if ($sort == "DESC") {
+        if (strcasecmp($sort, 'DESC') === 0) {
             usort($filteredentries, function($a, $b) {
                 return format_string($b->concept) <=> format_string($a->concept);
             });

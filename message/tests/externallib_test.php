@@ -5191,7 +5191,7 @@ final class externallib_test extends externallib_advanced_testcase {
 
         return [
             'No conversations' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user5],
@@ -5208,7 +5208,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'No individual conversations, 2 group conversations' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user4],
@@ -5225,7 +5225,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             '2 individual conversations (one favourited), 1 group conversation' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user1],
@@ -5242,7 +5242,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             '1 individual conversation, 2 group conversations' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user2],
@@ -5259,7 +5259,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             '2 group conversations only' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user4],
@@ -5276,7 +5276,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete a message from individual favourited, messages remaining' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [0],
                 'arguments' => [$user1],
@@ -5293,7 +5293,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete a message from individual non-favourited, messages remaining' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [3],
                 'arguments' => [$user1],
@@ -5310,7 +5310,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete all messages from individual favourited, no messages remaining' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [0, 1, 2],
                 'arguments' => [$user1],
@@ -5327,7 +5327,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete all messages from individual non-favourited, no messages remaining' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [3, 4, 5],
                 'arguments' => [$user1],
@@ -5344,7 +5344,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete all messages from individual favourited, no messages remaining, different user' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [0, 1, 2],
                 'arguments' => [$user2],
@@ -5361,7 +5361,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete all messages from individual non-favourited, no messages remaining, different user' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [3, 4, 5],
                 'arguments' => [$user3],
@@ -5378,7 +5378,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete some messages from group non-favourited, messages remaining,' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [6, 7],
                 'arguments' => [$user1],
@@ -5395,7 +5395,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, delete all messages from group non-favourited, no messages remaining,' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => $user1,
                 'deletemessages' => [6, 7, 8, 9],
                 'arguments' => [$user1],
@@ -5412,7 +5412,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'All conversation types, another user soft deleted' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user1],
@@ -5429,7 +5429,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => [$user2]
             ],
             'All conversation types, all group users soft deleted' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user1],
@@ -5446,7 +5446,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => [$user2, $user3, $user4]
             ],
             'Group conversation which is disabled, favourited' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user6],
@@ -5463,7 +5463,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'Group conversation which is disabled, non-favourited' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user7],
@@ -5480,7 +5480,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 'deletedusers' => []
             ],
             'Conversation with self' => [
-                'conversationConfigs' => $conversations,
+                'conversationconfigs' => $conversations,
                 'deletemessagesuser' => null,
                 'deletemessages' => [],
                 'arguments' => [$user8],
@@ -5886,5 +5886,38 @@ final class externallib_test extends externallib_advanced_testcase {
         );
 
         return [$user1, $user2, $user3, $convgroup, $convindividual];
+    }
+
+    /**
+     * Test the getting and setting of unsent messages.
+     *
+     * @covers ::get_unsent_message
+     */
+    public function test_get_unsent_message(): void {
+        $this->resetAfterTest();
+
+        // Create some users.
+        $user1 = self::getDataGenerator()->create_user();
+        $user2 = self::getDataGenerator()->create_user();
+
+        // Set an unsent message for user1.
+        $this->setUser($user1);
+        $message = 'Hello there';
+        $conversationid = 123;
+        $otheruserid = 456;
+        external\set_unsent_message::execute($message, $conversationid, $otheruserid);
+
+        // Get the unsent message for user1.
+        $result = external\get_unsent_message::execute();
+        $result = external_api::clean_returnvalue(external\get_unsent_message::execute_returns(), $result);
+        $this->assertEquals($message, $result['message']);
+        $this->assertEquals($conversationid, $result['conversationid']);
+        $this->assertEquals($otheruserid, $result['otheruserid']);
+
+        // We should not be able to get user1's messages as another user.
+        $this->setUser($user2);
+        $result = external\get_unsent_message::execute();
+        $result = external_api::clean_returnvalue(external\get_unsent_message::execute_returns(), $result);
+        $this->assertEmpty($result);
     }
 }

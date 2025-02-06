@@ -3260,6 +3260,12 @@ $functions = array(
         'ajax'        => true,
         'readonlysession' => true,
     ],
+    'core_ai_delete_provider_instance' => [
+        'classname'   => \core_ai\external\delete_provider_instance::class,
+        'description' => 'Delete a provider instance',
+        'type'        => 'write',
+        'ajax'        => true,
+    ],
     'core_ai_set_policy_status' => [
         'classname'   => 'core_ai\external\set_policy_status',
         'description' => 'Set a users AI policy acceptance',
@@ -3280,6 +3286,12 @@ $functions = array(
         'type'        => 'write',
         'ajax'        => true,
     ],
+    'core_ai_set_provider_status' => [
+        'classname'   => \core_ai\external\set_provider_status::class,
+        'description' => 'Set a providers status',
+        'type'        => 'write',
+        'ajax'        => true,
+    ],
     'core_sms_set_gateway_status' => [
         'classname'   => 'core_sms\external\sms_gateway_status',
         'description' => 'Set the sms gateway status',
@@ -3290,6 +3302,18 @@ $functions = array(
         'classname' => '\core_question\external\move_questions',
         'description' => 'Bulk move questions to a new category.',
         'type' => 'write',
+        'ajax' => true,
+    ],
+    'core_message_set_unsent_message' => [
+        'classname' => 'core_message\external\set_unsent_message',
+        'description' => 'Store an unsent message string',
+        'type' => 'write',
+        'ajax' => true,
+    ],
+    'core_message_get_unsent_message' => [
+        'classname' => 'core_message\external\get_unsent_message',
+        'description' => 'Get an unsent message string',
+        'type' => 'read',
         'ajax' => true,
     ],
 );
