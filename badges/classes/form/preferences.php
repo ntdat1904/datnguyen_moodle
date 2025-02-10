@@ -28,6 +28,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @package    core_badges
  * @copyright  2018 Tung Thai
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author     Yuliya Bozhko <yuliya.bozhko@totaralms.com>
  * @author     Tung Thai <Tung.ThaiDuc@nashtechglobal.com>
  */
 class preferences extends moodleform {

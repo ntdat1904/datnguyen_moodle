@@ -25,7 +25,7 @@ require_once($CFG->libdir . '/badgeslib.php');
 /**
  * Form to edit badge details.
  *
- * @package    core_badges
+ * @package   core_badges
  * @copyright 2018 Tung Thai
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author    Tung Thai <Tung.ThaiDuc@nashtechglobal.com>
