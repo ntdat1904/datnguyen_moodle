@@ -137,14 +137,14 @@ $functions = array(
         'type'          => 'read',
         'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
     ],
-    'core_badges_get_user_badges' => array(
-        'classname'     => 'core_badges_external',
-        'methodname'    => 'get_user_badges',
+    'core_badges_get_user_badges' => [
+        'classname'     => 'core_badges\external\get_user_badges',
+        'methodname'    => 'execute',
         'description'   => 'Returns the list of badges awarded to a user.',
         'type'          => 'read',
         'capabilities'  => 'moodle/badges:viewotherbadges',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
-    ),
+        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+    ],
     'core_badges_get_user_badge_by_hash' => [
         'classname'     => 'core_badges\external\get_user_badge_by_hash',
         'description'   => 'Returns the badge awarded to a user by hash.',
