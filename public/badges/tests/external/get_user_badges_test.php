@@ -44,8 +44,6 @@ require_once($CFG->libdir . '/badgeslib.php');
  * @package    core_badges
  * @category   test
  * @copyright  2016 Juan Leyva <juan@moodle.com>
- * @author     2016 Juan Leyva <juan@moodle.com>
- * @author     2025 Dai Nguyen Trong <ngtrdai@hotmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers     \core_badges\external\get_user_badges
  */
@@ -70,6 +68,29 @@ final class get_user_badges_test extends externallib_advanced_testcase {
         $result = external_api::clean_returnvalue(get_user_badges::execute_returns(), $result);
         $this->assertCount(1, $result['badges']);
         $this->assert_issued_badge($data['coursebadge'], $result['badges'][0], true, false);
+    }
+
+    /**
+     * Test get other user badges.
+     */
+    public function test_get_other_user_badges(): void {
+        $data = $this->prepare_test_data();
+
+        // User with "moodle/badges:configuredetails" capability.
+        $this->setAdminUser();
+        $result = get_user_badges::execute($data['student']->id);
+        $result = external_api::clean_returnvalue(get_user_badges::execute_returns(), $result);
+        $this->assertCount(2, $result['badges']);
+        $this->assert_issued_badge($data['coursebadge'], $result['badges'][0], false, true);
+        $this->assert_issued_badge($data['sitebadge'], $result['badges'][1], false, true);
+
+        // User without "moodle/badges:configuredetails" capability.
+        $this->setUser($this->getDataGenerator()->create_user());
+        $result = get_user_badges::execute($data['student']->id);
+        $result = external_api::clean_returnvalue(get_user_badges::execute_returns(), $result);
+        $this->assertCount(2, $result['badges']);
+        $this->assert_issued_badge($data['coursebadge'], $result['badges'][0], false, false);
+        $this->assert_issued_badge($data['sitebadge'], $result['badges'][1], false, false);
     }
 
     /**
